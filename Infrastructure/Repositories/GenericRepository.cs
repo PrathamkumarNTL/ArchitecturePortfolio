@@ -49,5 +49,10 @@ namespace Infrastructure.Repositories
         {
             return await _context.Set<T>().Where(predicate).ToListAsync();
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

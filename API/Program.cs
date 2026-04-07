@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence;
 using Application.Interfaces;
 using Infrastructure.Repositories;
+using Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +17,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//Dependency Injection 
+//Dependency Injection Repository
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
 builder.Services.AddScoped<IFeedbackRepository,FeedbackRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+
+//Dependency Injection Repository
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 var app = builder.Build();
 

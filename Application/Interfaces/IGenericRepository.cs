@@ -10,5 +10,6 @@ namespace Application.Interfaces
         void Delete(T entity);
         Task<bool> ExistsAsync(int id);
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+        Task SaveChangesAsync();
     }
 }
