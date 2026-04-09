@@ -18,7 +18,7 @@ namespace Application.Services
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            if(booking.BookingDate < DateTime.Now)
+            if(booking.BookingDate < DateTime.UtcNow)
                 throw new Exception("Booking date cannot be in the past.");
 
             await _bookingRepository.AddAsync(booking);
