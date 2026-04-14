@@ -1,14 +1,11 @@
-﻿namespace Domain.Entities
+﻿namespace Application.DTOs.Projects
 {
-    public class Project : BaseEntity
+    public class CreateProjectDto
     {
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
-        public string Location { get; set; } = string.Empty;    
+        public string Location { get; set; } = string.Empty;
         public DateTime CompletetionDate { get; set; }
-
-        //Navigation property
-        public ICollection<ProjectImage> Images { get; set; }
     }
 }

@@ -3,6 +3,9 @@ using Infrastructure.Persistence;
 using Application.Interfaces;
 using Infrastructure.Repositories;
 using Application.Services;
+using Application.Mappings;
+using FluentValidation.AspNetCore;
+using Application.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +29,11 @@ builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddControllers()
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateProjectValidator>());
 
 var app = builder.Build();
 

@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs.Feedback;
+using Application.Interfaces;
+using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +11,15 @@ namespace API.Controllers
     public class FeedbackController : ControllerBase
     {
         private readonly IFeedbackService _feedbackService;
+        private readonly IMapper _mapper;
 
-        public FeedbackController(IFeedbackService feedbackService)
+        public FeedbackController(IFeedbackService feedbackService,IMapper mapper)
         {
             _feedbackService = feedbackService;
+            _mapper = mapper;
         }
 
-        //GET: api/feedback
+        //GET: api/feedbackh
        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,8 +29,9 @@ namespace API.Controllers
 
         // POST: api/feedback
         [HttpPost]
-        public async Task<IActionResult> Create(Feedback feedback)
+        public async Task<IActionResult> Create(CreateFeedbackDto dto)
         {
+            var feedback = _mapper.Map<Feedback>(dto);
             await _feedbackService.CreateFeedbackAsync(feedback);
             return Ok("Feedback submitted successfully");
         }

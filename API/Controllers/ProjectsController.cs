@@ -1,5 +1,6 @@
-﻿
+﻿using Application.DTOs.Projects;
 using Application.Interfaces;
+using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,12 @@ namespace API.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly IProjectService _projectService;
+        private readonly IMapper _mapper;
 
-        public ProjectsController(IProjectService projectService)
+        public ProjectsController(IProjectService projectService,IMapper mapper)
         {
             _projectService = projectService;
+            _mapper = mapper;
         }
 
         // GET: api/projects
@@ -21,7 +24,8 @@ namespace API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var projects = await _projectService.GetAllProjectsAsync();
-            return Ok(projects);
+            var result = _mapper.Map<IEnumerable<ProjectResponseDto>>(projects);
+            return Ok(result);
         }
 
         // GET: api/projects/5
@@ -36,8 +40,9 @@ namespace API.Controllers
 
         // POST: api/projects
         [HttpPost]
-        public async Task<IActionResult> Create(Project project)
+        public async Task<IActionResult> Create(CreateProjectDto dto)
         {
+            var project = _mapper.Map<Project>(dto);
             await _projectService.CreateProjectAsync(project);
             return Ok("Projected created successfully");
         }
