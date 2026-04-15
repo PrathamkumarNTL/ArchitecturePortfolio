@@ -22,6 +22,7 @@ namespace Application.Services
                 throw new Exception("Name is required.");
 
             await _feedbackRepository.AddAsync(feedback);
+            await _feedbackRepository.SaveChangesAsync();
         }
     }
 }

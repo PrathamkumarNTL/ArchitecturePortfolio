@@ -22,6 +22,7 @@ namespace Application.Services
                 throw new Exception("Booking date cannot be in the past.");
 
             await _bookingRepository.AddAsync(booking);
+            await _bookingRepository.SaveChangesAsync();
         }
     }
 }

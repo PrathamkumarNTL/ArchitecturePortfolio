@@ -11,7 +11,10 @@ namespace Application.Mappings
         public MappingProfile()
         {
             CreateMap<CreateProjectDto, Project>();
-            CreateMap<Project,ProjectResponseDto>().ForMember(dest => dest.ImageUrls,opt => opt.MapFrom(src => src.Images.Select(i => i.ImageUrl)));
+            CreateMap<UpdateProjectDto, Project>();
+            CreateMap<Project, ProjectResponseDto>()
+                .ForMember(dest => dest.ImageUrls,
+                    opt => opt.MapFrom(src => src.Images.Select(i => i.ImageUrl)));
 
             CreateMap<CreateFeedbackDto, Feedback>();
             CreateMap<CreateBookingDto, Booking>();

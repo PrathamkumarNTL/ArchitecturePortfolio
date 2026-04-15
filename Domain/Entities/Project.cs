@@ -6,7 +6,7 @@
         public string Description { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;    
-        public DateTime CompletetionDate { get; set; }
+        public DateTime CompletionDate { get; set; }
 
         //Navigation property
         public ICollection<ProjectImage> Images { get; set; }

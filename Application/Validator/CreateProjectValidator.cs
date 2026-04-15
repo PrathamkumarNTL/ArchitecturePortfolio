@@ -10,7 +10,7 @@ namespace Application.Validator
             RuleFor(x => x.Title).NotEmpty().MaximumLength(100);
             RuleFor(x => x.Category).NotEmpty();
             RuleFor(x => x.Location).NotEmpty();
-            RuleFor(x => x.CompletetionDate).LessThanOrEqualTo(DateTime.Now);
+            RuleFor(x => x.CompletionDate).LessThanOrEqualTo(DateTime.Now);
         }
     }
 }

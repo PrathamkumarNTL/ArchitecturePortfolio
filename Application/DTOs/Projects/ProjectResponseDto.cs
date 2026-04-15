@@ -6,7 +6,7 @@
         public string Title { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
-        public DateTime CompletetionDate { get; set; }
+        public DateTime CompletionDate { get; set; }
         public List<string> ImageUrls { get; set; } = new();
     }
 }

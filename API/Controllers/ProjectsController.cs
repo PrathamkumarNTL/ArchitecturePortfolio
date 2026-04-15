@@ -48,11 +48,19 @@ namespace API.Controllers
         }
 
         // PUT: api/projects
-        [HttpPut]
-        public async Task<IActionResult> Update(Project project)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdateProjectDto dto)
         {
-            await _projectService.UpdateProjectAsync(project);
-            return Ok("Projected updated successfully");
+            var existingProject = await _projectService.GetProjectByIdAsync(id);
+
+            if (existingProject == null)
+                return NotFound();
+
+            _mapper.Map(dto, existingProject);
+
+            await _projectService.UpdateProjectAsync(existingProject);
+
+            return Ok("Project updated successfully");
         }
 
         // DELETE: api/projects/5
